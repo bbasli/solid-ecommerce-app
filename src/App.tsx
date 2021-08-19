@@ -1,26 +1,26 @@
-import type { Component } from "solid-js";
-
-import logo from "./logo.svg";
-import styles from "./App.module.css";
+import { Component, createSignal } from "solid-js";
 
 const App: Component = () => {
+  const [search, setSearch] = createSignal("");
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
+    <>
+      <div class="bg-blue-900 text-white flex flex-row w-full py-4">
+        <div class="text-2xl px-10 py-2">
+          <i class="fas fa-donate mr-2"></i>
+          Simple eCommerce
+        </div>
+        <div class="flex-grow">
+          <input
+            type="text"
+            value={search()}
+            onInput={(evt) => setSearch(evt.currentTarget.value)}
+            class="p-2 text-xl bg-white text-black rounded-lg max-w-md w-96"
+          />
+        </div>
+      </div>
+      <h1>{search()}</h1>
+    </>
   );
 };
 
