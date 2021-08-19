@@ -1,7 +1,17 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, createResource } from "solid-js";
+import { Product } from "./product";
 
 const App: Component = () => {
   const [search, setSearch] = createSignal("");
+
+  const [products] = createResource<Product[]>(
+    async () => {
+      const response = await fetch("http://fakestoreapi.com/products");
+      const products = await response.json();
+      return products;
+    },
+    { initialValue: [] }
+  );
 
   return (
     <>
